@@ -1,25 +1,14 @@
 # Import required libraries
 import matplotlib.pyplot as plt
 
-# 1. Create the dictionary
-language_popularity = {
-    "JavaScript": 62.3,
-    "HTML": 52.9,
-    "Python": 51,
-    "SQL": 51,
-    "TypeScript": 38.5
-}
+# Create the dictionary
+language_popularity = {"JavaScript": 62.3,"HTML": 52.9,"Python": 51,"SQL": 51,"TypeScript": 38.5}
 
-# 2. Create and modify the requested language variable here
-# ************** MODIFY THIS VARIABLE **************
-requested_language = "Python"
-# ***************************************************
+# Retrieve and print the percentage
+percentage = language_popularity.get("Python", "Language not found")
+print(f"{percentage}% of developers use {"Python"}")
 
-# 3. Retrieve and print the percentage
-percentage = language_popularity.get(requested_language, "Language not found")
-print(f"{percentage}% of developers use {requested_language}")
-
-# 4. Create the bar plot
+# Create the bar plot
 plt.figure(figsize=(10, 6))
 bars = plt.bar(language_popularity.keys(), language_popularity.values(), color='skyblue')
 
@@ -37,6 +26,5 @@ for bar in bars:
              ha='center', va='bottom')
 
 plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.xticks(rotation=45)
 plt.tight_layout()  # Adjust layout to prevent label cutoff
 plt.show()
