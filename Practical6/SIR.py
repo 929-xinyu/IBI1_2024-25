@@ -32,14 +32,13 @@ for t in range(1000): # Simulate 1000 time units
     I_list.append(I_new)
     R_list.append(R_new)
 
-# Draw the SIR model simulation gragh
+# Draw the SIR model gragh
 plt.figure(figsize=(6, 4), dpi =150)
-plt.plot(S_list, label='Susceptible')
-plt.plot(I_list, label='Infected')
-plt.plot(R_list, label='Recovered')
-plt.xlabel('Time')
-plt.ylabel('Number of People')
-plt.title('SIR Model Simulation')
+plt.plot(S_list, label='susceptible')
+plt.plot(I_list, label='infected')
+plt.plot(R_list, label='recovered')
+plt.xlabel('time')
+plt.ylabel('number of people')
+plt.title('SIR Model')
 plt.legend()
-plt.grid()
 plt.show()
