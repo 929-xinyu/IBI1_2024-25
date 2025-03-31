@@ -20,7 +20,7 @@ plt.figure(figsize=(8, 8))
 explode_uk = [0.1, 0, 0, 0]  # Highlight England
 colors_uk = ['red', 'blue', 'green', 'yellow']
 plt.pie(uk_populations, labels=uk_countries, autopct='%1.1f%%', startangle=90, explode=explode_uk, colors=colors_uk)
-plt.title('population Distribution in UK Countries')
+plt.title('population distribution in UK Countries')
 plt.show()
 
 # Create a pie chart for Chinese provinces
@@ -28,5 +28,5 @@ plt.figure(figsize=(8, 8))
 explode_china = [0, 0, 0, 0.1, 0]  # Highlight Anhui
 colors_china = ['red', 'orange', 'yellow', 'green', 'blue']
 plt.pie(china_populations, labels=china_provinces, autopct='%1.1f%%', startangle=90, explode=explode_china, colors=colors_china)
-plt.title('population Distribution in Zhejiang-neighbouring Provinces')
+plt.title('population distribution in Zhejiang-neighbouring Provinces')
 plt.show()
