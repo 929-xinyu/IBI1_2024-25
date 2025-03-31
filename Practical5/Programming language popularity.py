@@ -13,10 +13,9 @@ plt.figure(figsize=(10, 6))
 bars = plt.bar(language_popularity.keys(), language_popularity.values(), color='skyblue')
 
 # Customize the plot
-plt.title('Programming Language Popularity (February 2024)', fontsize=14)
-plt.xlabel('Programming Languages', fontsize=12)
-plt.ylabel('Percentage of Developers', fontsize=12)
-plt.ylim(0, 70)  # Set y-axis limit for better visualization
+plt.title('Programming Language Popularity (February 2024)')
+plt.xlabel('Programming Languages')
+plt.ylabel('Percentage of Developers')
 
 # Add percentage labels on top of bars
 for bar in bars:
@@ -24,7 +23,5 @@ for bar in bars:
     plt.text(bar.get_x() + bar.get_width()/2., height,
              f'{height}%',
              ha='center', va='bottom')
-
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.tight_layout()  # Adjust layout to prevent label cutoff
+# Show the plot
 plt.show()
