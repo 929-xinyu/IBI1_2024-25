@@ -1,7 +1,7 @@
-# Import required libraries
+# import required libraries
 import matplotlib.pyplot as plt
 
-# Create the dictionary
+# create the dictionary
 language_popularity = {"JavaScript": 62.3,"HTML": 52.9,"Python": 51,"SQL": 51,"TypeScript": 38.5}
 
 # Retrieve and print the percentage
@@ -20,8 +20,6 @@ plt.ylabel('Percentage of Developers')
 # Add percentage labels on top of bars
 for bar in bars:
     height = bar.get_height()
-    plt.text(bar.get_x() + bar.get_width()/2., height,
-             f'{height}%',
-             ha='center', va='bottom')
+    plt.text(bar.get_x() + bar.get_width()/2., height, f'{height}%', ha='center', va='bottom')
 # Show the plot
 plt.show()
