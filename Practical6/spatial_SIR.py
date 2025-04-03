@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.colors import ListedColormap
 
-# Initialize parameters
-size = 100  # Grid size (100x100)
-beta = 0.3   # Infection probability
-gamma = 0.05 # Recovery probability
+# Initialize the data
+size = 100
+beta = 0.3
+gamma = 0.05
 timesteps = 100
 
 # Create custom colormap: susceptible=purple, infected=blue-green, recovered=yellow
