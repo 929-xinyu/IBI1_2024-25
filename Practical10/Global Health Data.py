@@ -3,38 +3,66 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# 加载数据
-dalys_data = pd.read_csv("dalys-rate-from-all-causes.csv")
+# set the working directory to where the dataset is located
+os.chdir("c:/Users/HUAWEI/Desktop/IBI/IBI1_2024-25/Practical10")
+print(os.getcwd())  # check current working directory
+print(os.listdir())  # check if the dataset exists
 
-# 数据检查
-dalys_data.head(5)      # 查看前5行=
-dalys_data.info()       # 数据类型和列名
-dalys_data.describe()   # 统计摘要
+# Check if the file exists
+file_path = "dalys-rate-from-all-causes.csv"
+if not os.path.exists(file_path):
+    raise FileNotFoundError(f"The file '{file_path}' does not exist in the directory '{os.getcwd()}'.")
 
-# 数据筛选
-print(dalys_data.iloc[0, 3])       # 第1行第4列
-print(dalys_data.iloc[0:10, 2])    # 前10行的第3列（年份）
+# Load the dataset
+dalys_data = pd.read_csv(file_path)
+print(dalys_data.head(5))
 
-# 筛选1990年的DALYs数据
-data_1990 = dalys_data.loc[dalys_data["Year"] == 1990, "DALYs"]
+print(dalys_data.info())
+print(dalys_data.describe())
 
-# 比较国家数据
-uk = dalys_data.loc[dalys_data["Entity"] == "United Kingdom", ["Year", "DALYs"]]
-france = dalys_data.loc[dalys_data["Entity"] == "France", ["Year", "DALYs"]]
-uk.describe()  # 描述性统计
+# check for missing values
+years_column = dalys_data.iloc[0:10, 2]  
+print(years_column)
 
-# 绘制英国趋势图
-plt.plot(uk["Year"], uk["DALYs"], "b-", label="UK")
-plt.xticks(rotation=90)  # 旋转x轴标签
-plt.xlabel("Year")
-plt.ylabel("DALYs")
-plt.title("DALYs in the UK Over Time")
+# Boolean Filtering for 1990 Data 
+is_1990 = dalys_data['Year'] == 1990
+dalys_1990 = dalys_data.loc[is_1990, ['Entity', 'DALYs']]
+print("\nall countries'DALYs in 1990：")
+print(dalys_1990)
+
+# compare DALYs between UK and France in 1990
+uk_data = dalys_data[dalys_data['Entity'] == 'United Kingdom']
+uk_mean = uk_data['DALYs'].mean()
+france_data = dalys_data[dalys_data['Entity'] == 'France']
+france_mean = france_data['DALYs'].mean()
+print(f"\nUK Mean DALYs: {uk_mean:.2f}")
+print(f"France Mean DALYs: {france_mean:.2f}")
+
+
+# UK trend visualization
+plt.figure(figsize=(10, 6))
+plt.plot(uk_data['Year'], uk_data['DALYs'], 'b-', label='UK')
+plt.title('UK DALYs Trend (1990-2019)')
+plt.xlabel('Year')
+plt.ylabel('DALYs')
+plt.xticks(rotation=45)
+plt.grid(True)
 plt.legend()
-plt.show()
+plt.tight_layout()
+plt.savefig('uk_dalys.png')
+plt.close()
 
-# 比较中国和英国
-china = dalys_data.loc[dalys_data["Entity"] == "China", ["Year", "DALYs"]]
-plt.plot(china["Year"], china["DALYs"], "g-", label="China")
-plt.plot(uk["Year"], uk["DALYs"], "b-", label="UK")
+# self-defined question: How does the DALYs trend in China compare to that in the UK?
+china_data = dalys_data[dalys_data['Entity'] == 'China']
+plt.figure(figsize=(12, 6))
+plt.plot(uk_data['Year'], uk_data['DALYs'], 'b-', label='UK')
+plt.plot(china_data['Year'], china_data['DALYs'], 'r--', label='China')
+plt.title('comparison of trend between China and UK')
+plt.xlabel('Year')
+plt.ylabel('DALYs')
+plt.xticks(rotation=45)
+plt.grid(True)
 plt.legend()
-plt.show()
+plt.tight_layout()
+plt.savefig('china_uk_comparison.png')
+plt.close()
