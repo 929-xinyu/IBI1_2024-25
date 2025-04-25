@@ -1,0 +1,2 @@
+# question:Which countries had DALYs > 650,000 in any year?
+high_daly = dalys_data.loc[dalys_data["DALYs"] > 650000, "Entity"].unique()

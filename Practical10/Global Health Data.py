@@ -37,8 +37,6 @@ france_data = dalys_data[dalys_data['Entity'] == 'France']
 france_mean = france_data['DALYs'].mean()
 print(f"\nUK Mean DALYs: {uk_mean:.2f}")
 print(f"France Mean DALYs: {france_mean:.2f}")
-
-
 # UK trend visualization
 plt.figure(figsize=(10, 6))
 plt.plot(uk_data['Year'], uk_data['DALYs'], 'b-', label='UK')
