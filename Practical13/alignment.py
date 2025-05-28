@@ -1,3 +1,9 @@
+# Project plan:
+# 1. The purpose of the program is to perform sequence alignment using the BLOSUM62 scoring matrix.
+# 2. The program will read sequences from a FASTA file and calculate alignment scores between pairs of sequences.
+# 3. It will use the BLOSUM62 matrix to score the alignments and calculate the percentage identity.
+# 4. The results will be printed to the console, showing the alignment scores and percentage identities for each pair of sequences.
+
 # Define the BLOSUM62 matrix
 blosum62 = {
     ('A', 'A'): 4, ('A', 'R'): -1, ('A', 'N'): -2, ('A', 'D'): -2, ('A', 'C'): 0, ('A', 'Q'): -1, ('A', 'E'): -1,
