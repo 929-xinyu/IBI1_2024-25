@@ -1,5 +1,5 @@
 # What does this piece of code do?
-# Answer:This code simulates rolling two dice repeatedly until both dice show the same number. It counts how many attempts are needed to get this matching pair.
+# Answer:This code simulates rolling two dice repeatedly until both dice show the same number. The number is between 1 and 6. It counts how many attempts are needed to get this matching pair.
 
 # Import libraries
 # randint allows drawing a random number,
