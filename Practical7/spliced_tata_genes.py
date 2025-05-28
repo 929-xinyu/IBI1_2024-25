@@ -1,8 +1,15 @@
+# Project Plan:
+# 1. The purpose of the program is to find genes that contain both a TATA box and a specific splice site in a given FASTA file.
+# 2. The program reads a FASTA file, extracts gene names and sequences, and checks for the presence of a TATA box and a specified splice site.
+# 3. If a gene contains at least one TATA box and the specified splice site, it is added to the results.
+# 4. The program counts the number of TATA boxes in each gene and outputs the results to the console.
+
+# Import necessary libraries
 import re
 import sys
 
 def read_fasta(file_path):
-    """读取FASTA文件，返回生成器，每次产生(header, sequence)"""
+    """Read a FASTA file and yield (header, sequence) tuples"""
     with open(file_path, 'r') as file:
         header = ''
         sequence = []
@@ -19,20 +26,20 @@ def read_fasta(file_path):
             yield (header, ''.join(sequence))
 
 def extract_gene_name(header):
-    """从FASTA头信息中提取基因名"""
+    """Extract gene name from FASTA header"""
     return header.split()[0][1:]
 
 def contains_splice_site(sequence, splice_site):
-    """检查序列是否包含指定的剪接位点组合"""
+    """Check if sequence contains the specified splice site motif"""
     return splice_site in sequence
 
 def count_tata_boxes(sequence):
-    """统计序列中TATA盒的数量"""
+    """Count the number of TATA boxes in the sequence"""
     pattern = re.compile(r'TATA[AT]A[AT]')
     return len(pattern.findall(sequence))
 
 def process_genes(input_file, splice_site):
-    """处理基因数据，返回符合条件的基因列表"""
+    """Process gene data and return a list of qualifying genes"""
     valid_genes = []
     for header, sequence in read_fasta(input_file):
         gene_name = extract_gene_name(header)
@@ -40,4 +47,3 @@ def process_genes(input_file, splice_site):
         
         if tata_count > 0 and contains_splice_site(sequence, splice_site):
             valid_genes.append((gene_name, sequence, tata_count))
- 

@@ -6,10 +6,11 @@
 # 5. The output file will only contain genes with TATA boxes.
 # 6. The program will handle file reading and writing, and ensure the input file exists.
 
+# Import necessary libraries
 import re
 
 def read_fasta(file_path):
-    """读取FASTA文件，返回生成器，每次产生(header, sequence)"""
+    """Read a FASTA file and yield (header, sequence) tuples"""
     with open(file_path, 'r') as file:
         header = ''
         sequence = []
@@ -26,23 +27,23 @@ def read_fasta(file_path):
             yield (header, ''.join(sequence))
 
 def extract_gene_name(header):
-    """从FASTA头信息中提取基因名(如YOL245C)"""
-    # 假设基因名是头信息中空格分隔的第一个字段(去掉>)
+    """Extract gene name (e.g., YOL245C) from FASTA header"""
+    # Assumes gene name is the first whitespace-separated field (after '>')
     return header.split()[0][1:]
 
 def contains_tata_box(sequence):
-    """检查序列是否包含TATA盒(TATAWAW，W=A/T)"""
-    # 使用正则表达式匹配TATAWAW模式
+    """Check if sequence contains a TATA box (TATAWAW, where W=A/T)"""
+    # Use regex to match TATAWAW pattern
     pattern = re.compile(r'TATA[AT]A[AT]')
     return bool(pattern.search(sequence))
 
 def process_fasta(input_file, output_file):
-    """处理FASTA文件，输出含有TATA盒的基因"""
+    """Process FASTA file and output genes containing TATA boxes"""
     with open(output_file, 'w') as out:
         for header, sequence in read_fasta(input_file):
             if contains_tata_box(sequence):
                 gene_name = extract_gene_name(header)
-                # 写入新FASTA文件，只包含基因名和序列
+                # Write to new FASTA file with only gene name and sequence
                 out.write(f'>{gene_name}\n{sequence}\n')
 
 # Main program
