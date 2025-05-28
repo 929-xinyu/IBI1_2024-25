@@ -29,10 +29,35 @@ else:
 # 4. Clculate W using the logical AND operator.
 # 5. Output the truth table for W.
 
-# The truth table for W is:
-X = True  # boolean value
-Y = False  # boolean value
-W = X and Y  # logical AND operation
+# The truth table for W (X AND Y) is:
+# | X     | Y     | W = X AND Y |
+# |-------|-------|-------------|
+# | True  | True  | True        |
+# | True  | False | False       |
+# | False | True  | False       |
+# | False | False | False       |
+
+# Part 1: Logical AND operation
+X = True   # boolean value
+Y = True   # boolean value
+W = X and Y  # W should only be true when both X and Y are true
 
 print("The truth table for W is:")
 print(f"X = {X}, Y = {Y}, W = {W}")  # print the result
+
+# Part 2: Comparison checks
+c = 10
+e = 5
+f = 15
+
+# Check 1: f should be greater than c
+if f > c:
+    print("Check 1 passed: f is greater than c")
+else:
+    print("Check 1 failed: f is not greater than c")
+
+# Check 2: c should be greater than e (alternative check)
+if c > e:
+    print("Check 2 passed: c is greater than e")
+else:
+    print("Check 2 failed: c is not greater than e")
