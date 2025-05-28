@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Set working directory
-os.chdir("/Desktop/IBI/IBI_2024-25/Practical10")  # Replace with actual path
+os.chdir(r"C:\Users\HUAWEI\Desktop\IBI\IBI1_2024-25\Practical10")  # 使用绝对路径
 print(os.getcwd())  # Verify current path
 print(os.listdir())  # Check if files exist
 
