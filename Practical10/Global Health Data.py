@@ -1,66 +1,51 @@
+# Project Plan:
+# 1. The purpose of the program is to find genes that contain both a TATA box and a specific splice site in a given FASTA file.
+# 2. The program reads a FASTA file, extracts gene names and sequences, and checks for the presence of a TATA box and a specified splice site.
+# 3. If a gene contains at least one TATA box and the specified splice site, it is added to the results.
+# 4. The program counts the number of TATA boxes in each gene and outputs the results to the console.
+
+# Import necessary libraries
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# set the working directory to where the dataset is located
-os.chdir("c:/Users/HUAWEI/Desktop/IBI/IBI1_2024-25/Practical10")
-print(os.getcwd())  # check current working directory
-print(os.listdir())  # check if the dataset exists
+# Set working directory
+os.chdir("/Desktop/IBI/IBI_2024-25/Practical10")  # Replace with actual path
+print(os.getcwd())  # Verify current path
+print(os.listdir())  # Check if files exist
 
-# Check if the file exists
-file_path = "dalys-rate-from-all-causes.csv"
-if not os.path.exists(file_path):
-    raise FileNotFoundError(f"The file '{file_path}' does not exist in the directory '{os.getcwd()}'.")
+# Load data
+dalys_data = pd.read_csv("dalys-rate-from-all-causes.csv")
 
-# Load the dataset
-dalys_data = pd.read_csv(file_path)
-print(dalys_data.head(5))
+# Data inspection
+dalys_data.head(5)      # View first 5 rows
+dalys_data.info()       # Data types and column names
+dalys_data.describe()   # Statistical summary
 
-print(dalys_data.info())
-print(dalys_data.describe())
+# Data filtering
+print(dalys_data.iloc[0, 3])       # 1st row, 4th column
+print(dalys_data.iloc[0:10, 2])    # First 10 rows, 3rd column (Year)
 
-# check for missing values
-years_column = dalys_data.iloc[0:10, 2]  
-print(years_column)
+# Filter DALYs data for 1990
+data_1990 = dalys_data.loc[dalys_data["Year"] == 1990, "DALYs"]
 
-# Boolean Filtering for 1990 Data 
-is_1990 = dalys_data['Year'] == 1990
-dalys_1990 = dalys_data.loc[is_1990, ['Entity', 'DALYs']]
-print("\nall countries'DALYs in 1990：")
-print(dalys_1990)
+# Compare country data
+uk = dalys_data.loc[dalys_data["Entity"] == "United Kingdom", ["Year", "DALYs"]]
+france = dalys_data.loc[dalys_data["Entity"] == "France", ["Year", "DALYs"]]
 
-# compare DALYs between UK and France in 1990
-uk_data = dalys_data[dalys_data['Entity'] == 'United Kingdom']
-uk_mean = uk_data['DALYs'].mean()
-france_data = dalys_data[dalys_data['Entity'] == 'France']
-france_mean = france_data['DALYs'].mean()
-print(f"\nUK Mean DALYs: {uk_mean:.2f}")
-print(f"France Mean DALYs: {france_mean:.2f}")
-# UK trend visualization
-plt.figure(figsize=(10, 6))
-plt.plot(uk_data['Year'], uk_data['DALYs'], 'b-', label='UK')
-plt.title('UK DALYs Trend (1990-2019)')
-plt.xlabel('Year')
-plt.ylabel('DALYs')
-plt.xticks(rotation=45)
-plt.grid(True)
+# Plot UK trend
+plt.plot(uk["Year"], uk["DALYs"], "b-", label="UK")
+plt.xticks(rotation=90)  # Rotate x-axis labels
+plt.xlabel("Year")
+plt.ylabel("DALYs")
+plt.title("DALYs in the UK Over Time")
 plt.legend()
-plt.tight_layout()
-plt.savefig('uk_dalys.png')
-plt.close()
+plt.show()
 
-# self-defined question: How does the DALYs trend in China compare to that in the UK?
-china_data = dalys_data[dalys_data['Entity'] == 'China']
-plt.figure(figsize=(12, 6))
-plt.plot(uk_data['Year'], uk_data['DALYs'], 'b-', label='UK')
-plt.plot(china_data['Year'], china_data['DALYs'], 'r--', label='China')
-plt.title('comparison of trend between China and UK')
-plt.xlabel('Year')
-plt.ylabel('DALYs')
-plt.xticks(rotation=45)
-plt.grid(True)
+# Compare China and UK
+china = dalys_data.loc[dalys_data["Entity"] == "China", ["Year", "DALYs"]]
+plt.plot(china["Year"], china["DALYs"], "g-", label="China")
+plt.plot(uk["Year"], uk["DALYs"], "b-", label="UK")
 plt.legend()
-plt.tight_layout()
-plt.savefig('china_uk_comparison.png')
-plt.close()
+plt.show()
