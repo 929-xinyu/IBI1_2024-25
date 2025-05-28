@@ -1,8 +1,12 @@
-import numpy as np
+# Project Plan:
+# 1.The purpose of this code is to simulate the spatial SIR model of disease spread on a grid and visualize the results.
+# 2.The code initializes a grid representing a population, simulates the spread of an infection, and visualizes the results using a custom colormap.
+# 3.The simulation includes infecting neighboring cells and recovering infected individuals over a specified number of timesteps.
+# Import necessary libraries
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.colors import ListedColormap
-
+import numpy as np
 # Initialize the data
 size = 100
 beta = 0.3
