@@ -1,5 +1,13 @@
-# DOM method
+# Project plan:
+# 1. The purpose of the program is to parse a Gene Ontology (GO) XML file and find the deepest terms in three main ontologies: molecular_function, biological_process, and cellular_component.
+# 2. The program will read the XML file, parse it, and extract terms along with their depth in the ontology hierarchy.
+# 3. It will identify the deepest term for each ontology based on the number of 'is_a' relationships.
+# 4. The results will be printed to the console, showing the term ID, name, and depth for each ontology.
+# This program parses a Gene Ontology (GO) XML file to find the deepest terms in three main ontologies: molecular_function, biological_process, and cellular_component.
+# The program uses two different XML parsing methods: DOM and SAX, and compares their performance.
 
+# DOM method
+# Import necessary libraries
 import xml.dom.minidom
 from datetime import datetime
 
